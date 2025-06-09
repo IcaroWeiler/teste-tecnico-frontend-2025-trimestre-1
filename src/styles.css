@@ -1,1 +1,39 @@
 @import "tailwindcss";
+@theme {  
+    --color-title: #ffffff;  
+    --color-subText: #808080;  
+    --color-pageBg: #0D0D0D;
+    --color-buttonBg: #1A1A1A;
+    --color-buttonText: #ffffff;
+
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s forwards;
+}
+
+.animate-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animate-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animate-delay-1500 {
+  animation-delay: 1.5s;
+}
+
+.animate-delay-2000 {
+  animation-delay: 2s;
+}
+
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
