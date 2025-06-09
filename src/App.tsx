@@ -3,6 +3,7 @@ import "./styles.css";
 import { useAddressStore } from "./stores/addresses";
 import Login from "./components/first-access/login";
 import { useShallow } from "zustand/react/shallow";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { userName, setUserName } = useAddressStore(
@@ -23,6 +24,8 @@ function App() {
           <Login setUserName={setUserName}></Login>
         </div>
       )}
+
+      <ToastContainer position="top-right" />
     </>
   );
 }
