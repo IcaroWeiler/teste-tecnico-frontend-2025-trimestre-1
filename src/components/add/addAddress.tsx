@@ -10,7 +10,7 @@ const AddAddress = () => {
     }))
   );
   return (
-    <div>
+    <div className="w-[500px] fade-in animate-delay-500 bg-cardBg p-15 rounded-lg">
       <Input placeholder="Nome de usuário" />
       <Input placeholder="Nome de exibição" />
       <button onClick={() => setUserName("")}>Deslogar</button>
