@@ -11,9 +11,16 @@ const AddAddress = () => {
   );
   return (
     <div className="w-[500px] fade-in animate-delay-500 bg-cardBg p-15 rounded-lg">
-      <Input placeholder="Nome de usuário" />
-      <Input placeholder="Nome de exibição" />
-      <button onClick={() => setUserName("")}>Deslogar</button>
+      <Input size="large" placeholder="Nome de exibição" />
+      <Input size="large" placeholder="CEP" />
+      <button
+        className="mt-4 py-3 px-4 bg-buttonBg text-buttonText rounded-lg cursor-pointer"
+        onClick={() => {
+          setUserName("");
+        }}
+      >
+        Deslogar
+      </button>
     </div>
   );
 };

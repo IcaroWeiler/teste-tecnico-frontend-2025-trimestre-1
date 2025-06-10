@@ -29,12 +29,13 @@ const FirstAccess = ({ setUserName, userName }: LoginProps) => {
             value={user}
             onChange={(e) => setUser(e.target.value)}
             placeholder="Nome de usuário"
+            size="large"
             maxLength={15}
           />
         </div>
 
         <button
-          className="mt-4 py-4 px-8 bg-buttonBg text-buttonText rounded-lg cursor-pointer"
+          className="mt-4 py-3 px-4 bg-buttonBg text-buttonText rounded-lg cursor-pointer"
           onClick={() => {
             if (user) {
               setUserName(user);

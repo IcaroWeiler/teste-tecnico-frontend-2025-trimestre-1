@@ -1,7 +1,7 @@
 import AddAddress from "../../components/add/addAddress";
 const Add = () => {
   return (
-    <div className="flex justify-center items-center h-[100vh] w-[100vh]">
+    <div className="flex justify-center items-center h-full">
       <AddAddress />
     </div>
   );
