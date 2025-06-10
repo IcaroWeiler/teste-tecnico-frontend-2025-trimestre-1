@@ -1,10 +1,9 @@
 export interface Address {
-  id: number;
+  id: string;
   userName: string;
   displayName: string;
   street: string;
-  number: number;
-  postalCode: number;
+  cep: string;
   city: string;
   state: string;
 }

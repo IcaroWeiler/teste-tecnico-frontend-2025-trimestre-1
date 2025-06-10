@@ -13,6 +13,7 @@ import { type JSX } from "react";
 import Add from "./pages/add/Add";
 import Login from "./pages/login/Login";
 import Header from "./components/header/header";
+import Search from "./pages/search/search";
 
 // Componente para rotas protegidas
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
@@ -72,9 +73,18 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MainLayout>
-                    {" "}
-                    {/* Envolve o conteúdo protegido */}
                     <Add />
+                  </MainLayout>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/search"
+              element={
+                <ProtectedRoute>
+                  <MainLayout>
+                    <Search />
                   </MainLayout>
                 </ProtectedRoute>
               }
