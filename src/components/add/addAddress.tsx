@@ -84,6 +84,8 @@ const AddAddress = ({ id, edit }: AddAddressParams) => {
     if (edit) {
       const selectedAddress = addresses.find((a) => a.id == id);
 
+      if (selectedAddress?.userName != userName) return;
+
       if (selectedAddress) {
         setFormData({
           cep: selectedAddress.cep,
