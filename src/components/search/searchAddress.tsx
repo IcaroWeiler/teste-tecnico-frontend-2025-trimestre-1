@@ -5,6 +5,7 @@ import { ConfigProvider, Empty, Input, Table } from "antd";
 import type { Address } from "../../models/address";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
+import { useNavigate } from "react-router-dom";
 
 const SearchAddress = () => {
   const { addresses, userName, removeAddress } = useAddressStore(
@@ -14,6 +15,8 @@ const SearchAddress = () => {
       removeAddress: state.removeAddress,
     }))
   );
+
+  const navigate = useNavigate();
 
   const [nameFilter, setNameFilter] = useState<string>();
   const [stateFilter, setStateFilter] = useState<string>();
@@ -27,6 +30,10 @@ const SearchAddress = () => {
 
   const handleDelete = (record: Address) => {
     removeAddress(record.id);
+  };
+
+  const handleEdit = (record: Address) => {
+    navigate(`/edit/${record.id}`);
   };
 
   const filteredAddresses = addresses.filter((a) => {
@@ -79,7 +86,7 @@ const SearchAddress = () => {
           scroll={{ x: "calc(700px + 50%)", y: 47 * 5 }}
           pagination={false}
           dataSource={filteredAddresses}
-          columns={tableColumns(handleDelete)}
+          columns={tableColumns(handleDelete, handleEdit)}
           rowKey="id"
         />
       </ConfigProvider>

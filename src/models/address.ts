@@ -14,4 +14,5 @@ export interface AddressStore {
   addresses: Address[];
   addAddress: (address: Address) => void;
   removeAddress: (id: string | number) => void;
+  editAddress: (address: Address) => void;
 }

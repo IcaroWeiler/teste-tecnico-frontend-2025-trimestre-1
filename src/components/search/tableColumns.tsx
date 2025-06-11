@@ -1,8 +1,11 @@
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Space } from "antd";
 import type { Address } from "../../models/address";
 
-const columns = (onDelete: (address: Address) => void) => [
+const columns = (
+  onDelete: (address: Address) => void,
+  onEdit: (address: Address) => void
+) => [
   {
     title: "Nome de Exibição",
     dataIndex: "displayName",
@@ -32,12 +35,15 @@ const columns = (onDelete: (address: Address) => void) => [
     title: "Ação",
     key: "action",
     render: (record: Address) => (
-      <div className="flex justify-center items-center w-[35px]">
+      <div className="flex gap-2 justify-center items-center w-[35px]">
+        <EditOutlined
+          onClick={() => onEdit(record)}
+          style={{ cursor: "pointer" }}
+        />
         <DeleteOutlined
           onClick={() => onDelete(record)}
           style={{ color: "red", cursor: "pointer" }}
         />
-        ,
       </div>
     ),
   },

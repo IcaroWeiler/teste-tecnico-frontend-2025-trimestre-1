@@ -18,6 +18,11 @@ type AddressFormData = {
   street: string;
 };
 
+type AddAddressParams = {
+  edit: boolean;
+  id: string;
+};
+
 const initialFormData: AddressFormData = {
   displayName: "",
   cep: "",
@@ -26,11 +31,13 @@ const initialFormData: AddressFormData = {
   street: "",
 };
 
-const AddAddress = () => {
-  const { addAddress, userName } = useAddressStore(
+const AddAddress = ({ id, edit }: AddAddressParams) => {
+  const { addAddress, editAddress, userName, addresses } = useAddressStore(
     useShallow((state) => ({
       addAddress: state.addAddress,
+      editAddress: state.editAddress,
       userName: state.userName,
+      addresses: state.addresses,
     }))
   );
 
@@ -73,6 +80,24 @@ const AddAddress = () => {
       .catch((e) => console.log(e));
   }, [formData.cep]);
 
+  useEffect(() => {
+    if (edit) {
+      const selectedAddress = addresses.find((a) => a.id == id);
+
+      if (selectedAddress) {
+        setFormData({
+          cep: selectedAddress.cep,
+          displayName: selectedAddress.displayName,
+          state: selectedAddress.state,
+          street: selectedAddress.street,
+          city: selectedAddress.city,
+        });
+      }
+    } else {
+      setFormData(initialFormData);
+    }
+  }, [edit]);
+
   const hasEmptyFields = (data: AddressFormData): boolean => {
     return Object.values(data).some((value) => value.trim() === "");
   };
@@ -89,6 +114,10 @@ const AddAddress = () => {
       return { error: true, message: "O CEP é inválido" };
     }
 
+    if (edit) {
+      return { error: false, message: "O endereço foi editado com sucesso" };
+    }
+
     return { error: false, message: "O endereço foi cadastrado com sucesso" };
   };
 
@@ -98,9 +127,22 @@ const AddAddress = () => {
     if (response.error) {
       toast(response.message, { type: "error" });
     } else {
-      toast(response.message, { type: "success" });
-      addAddress({ ...formData, userName: userName, id: crypto.randomUUID() });
-      setFormData(initialFormData);
+      if (!edit) {
+        toast(response.message, { type: "success" });
+        addAddress({
+          ...formData,
+          userName: userName,
+          id: crypto.randomUUID(),
+        });
+        setFormData(initialFormData);
+      } else {
+        toast(response.message, { type: "success" });
+        editAddress({
+          ...formData,
+          userName: userName,
+          id: id,
+        });
+      }
     }
   };
 
@@ -149,7 +191,7 @@ const AddAddress = () => {
         className="mt-4 py-3 px-4 bg-buttonBg text-buttonText rounded-lg cursor-pointer"
         onClick={handleSubmit}
       >
-        Adicionar
+        {edit ? "Editar" : "Adicionar"}
       </button>
     </div>
   );

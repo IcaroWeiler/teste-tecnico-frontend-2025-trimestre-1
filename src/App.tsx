@@ -80,6 +80,17 @@ function App() {
             />
 
             <Route
+              path="/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <MainLayout>
+                    <Add />
+                  </MainLayout>
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               path="/search"
               element={
                 <ProtectedRoute>

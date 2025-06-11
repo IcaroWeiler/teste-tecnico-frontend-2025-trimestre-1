@@ -15,6 +15,12 @@ export const useAddressStore = create<AddressStore>()(
         set({
           addresses: get().addresses.filter((a: Address) => a.id !== id),
         }),
+      editAddress: (updatedAddress: Address) =>
+        set({
+          addresses: get().addresses.map((a: Address) =>
+            a.id === updatedAddress.id ? updatedAddress : a
+          ),
+        }),
     }),
     {
       name: "addresses-register",
